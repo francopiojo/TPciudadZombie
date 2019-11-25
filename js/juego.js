@@ -131,7 +131,7 @@ Juego.capturarMovimiento = function(tecla) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
 
-    /* COMPLETAR */
+    this.jugador.moverJugador(movX + this.jugador.x, movY + this.jugador.y, tecla);
   }
 };
 
