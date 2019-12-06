@@ -16,3 +16,10 @@ ZombieConductor.prototype.constructor = ZombieConductor;
 /* Completar creacion del ZombieConductor */
 
 /* Completar metodos para el movimiento y el ataque */
+
+
+
+
+ZombieConductor.prototype.atacar = function(jugador) {
+  jugador.perderVidas(jugador.vidas);
+}
