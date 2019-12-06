@@ -50,7 +50,8 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-
+    //Cambio no confirmado
+    //new ZombieCaminante('imagenes/zombie1.png', 300, 300, 10, 10, 1, rangoMov)
   ]
 
 }
