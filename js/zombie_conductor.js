@@ -15,4 +15,25 @@ ZombieConductor.prototype.constructor = ZombieConductor;
 
 /* Completar creacion del ZombieConductor */
 
+
 /* Completar metodos para el movimiento y el ataque */
+ZombieConductor.prototype.mover = function(){
+  if (this.direccion == 'v') {
+    if (this.y < this.rangoMov){
+      
+      this.y += this.velocidad;
+    }
+      else {
+       this.y = 0;
+    }
+  }
+  else{
+    if (this.x < this.rangoMov){
+      
+      this.x += this.velocidad;
+    }
+      else {
+       this.x = 0;
+    }
+  } 
+}
