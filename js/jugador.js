@@ -36,5 +36,9 @@ var Jugador = {
       this.ancho = 15;
     }
 
+  },
+
+  perderVidas: function(cantVidas){
+    this.vidas -= cantVidas;
   }
 }
