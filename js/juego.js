@@ -164,7 +164,7 @@ Juego.dibujar = function() {
   // Se recorren los enemigos pintandolos
   this.enemigos.forEach(function(enemigo) {
     /* Completar */
-    Dibujante.dibujarEntidad(enemigo);
+   
   });
 
   // El dibujante dibuja las vidas del jugador
