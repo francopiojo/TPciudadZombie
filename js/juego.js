@@ -16,16 +16,9 @@ var Juego = {
   vidasInicial: Jugador.vidas,
   // Indica si el jugador gano
   ganador: false,
-
-  obstaculosCarretera: [
-    /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
-    de ejemplo, pero podras agregar muchos mas. */
-    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1)
-
-  ],
-  /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
-   Ya estan ubicados en sus lugares correspondientes. Ya aparecen en el mapa, ya
-   que son invisibles. No tenes que preocuparte por ellos.*/
+  dificultad : 1,
+  obstaculosCarretera:[],
+  enemigos:[],
   bordes: [
     // // Bordes
     new Obstaculo('', 0, 5, 961, 18, 0),
@@ -42,11 +35,12 @@ var Juego = {
     new Obstaculo('', 279, 23, 664, 56, 2),
     new Obstaculo('', 887, 79, 56, 480, 2)
   ],
-  // Los enemigos se agregaran en este arreglo.
-  enemigos: [
-
-  ]
-
+rangoMov:{
+  desdeX:0,
+  hastaX:961,
+  desdeY:0,
+  hastaY: 577
+}
 }
 
 /* Se cargan los recursos de las imagenes, para tener un facil acceso
@@ -131,7 +125,7 @@ Juego.capturarMovimiento = function(tecla) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
 
-    /* COMPLETAR */
+    this.jugador.moverJugador(movX + this.jugador.x, movY + this.jugador.y, tecla);
   }
 };
 
@@ -147,6 +141,7 @@ Juego.dibujar = function() {
   "Dibujante dibuja al jugador" */
 
   /* Completar */
+  Dibujante.dibujarEntidad(this.jugador);
 
   // Se recorren los obstaculos de la carretera pintandolos
   this.obstaculosCarretera.forEach(function(obstaculo) {
@@ -156,6 +151,7 @@ Juego.dibujar = function() {
   // Se recorren los enemigos pintandolos
   this.enemigos.forEach(function(enemigo) {
     /* Completar */
+    Dibujante.dibujarEntidad(enemigo);
   });
 
   // El dibujante dibuja las vidas del jugador
@@ -174,6 +170,10 @@ un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
   /* COMPLETAR */
+  this.enemigos.forEach(function(enemigo) {
+    /* Completar */
+    enemigo.mover();
+  });
 };
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
@@ -185,9 +185,11 @@ Juego.calcularAtaques = function() {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
       /* Si el enemigo colisiona debe empezar su ataque
       COMPLETAR */
+      enemigo.comenzarAtaque(this.jugador);
     } else {
       /* Sino, debe dejar de atacar
       COMPLETAR */
+      enemigo.dejarDeAtacar();
     }
   }, this);
 };
@@ -201,7 +203,7 @@ Juego.chequearColisiones = function(x, y) {
   this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
 
-      /*COMPLETAR, obstaculo debe chocar al jugador*/
+      obstaculo.chocar(Jugador);
 
       puedeMoverse = false
     }
@@ -250,8 +252,63 @@ Juego.ganoJuego = function() {
   return (this.jugador.y + this.jugador.alto) > 530;
 };
 
+Juego.setearDificultad = function(){
+  this.dificultad = prompt("Selecciona la dificultad: \n 1 - Facil \n 2 - Media \n 3 - Dificil ");
+    if (this.dificultad === "1"){
+        this.obstaculosCarretera =  [
+              new Obstaculo('imagenes/valla_horizontal.png', 90, 430, 30, 30, 1),
+              new Obstaculo('imagenes/bache.png', 190, 460, 30, 30, 1),
+              new Obstaculo('imagenes/bache.png', 470, 400, 30, 30, 1),
+              new Obstaculo('imagenes/valla_vertical.png', 800, 80, 30, 30, 1)
+        ];
+        this.enemigos= [
+            new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 2, 577,'v'),
+            new ZombieConductor('imagenes/tren_vertical.png', 678, 0, 30, 90, 1, 577,'v'),
+            new ZombieConductor('imagenes/tren_horizontal.png', 400, 322, 90, 30, 2, 961,'h'),
+            new ZombieCaminante('imagenes/zombie1.png', 150, 400, 10, 10, 2, this.rangoMov)
+        ]
+    } else if (this.dificultad === "2"){
+          this.obstaculosCarretera =  [
+            new Obstaculo('imagenes/valla_horizontal.png', 90, 430, 30, 30, 1),
+            new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
+            new Obstaculo('imagenes/bache.png', 190, 460, 30, 30, 1),
+            new Obstaculo('imagenes/bache.png', 770, 430, 30, 30, 1),
+            new Obstaculo('imagenes/bache.png', 470, 400, 30, 30, 1),
+            new Obstaculo('imagenes/valla_vertical.png', 800, 80, 30, 30, 1),
+            new Obstaculo('imagenes/valla_vertical.png', 280, 210, 30, 30, 1)
+          ];
+          this.enemigos= [
+            new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 2, 577,'v'),
+            new ZombieConductor('imagenes/tren_vertical.png', 678, 0, 30, 90, 4, 577,'v'),
+            new ZombieConductor('imagenes/tren_horizontal.png', 400, 322, 90, 30, 3, 961,'h'),
+            new ZombieCaminante('imagenes/zombie1.png', 800, 90, 10, 10, 1, this.rangoMov),
+            new ZombieCaminante('imagenes/zombie2.png', 200, 150, 10, 10, 2, this.rangoMov),
+            new ZombieCaminante('imagenes/zombie3.png', 300, 340, 10, 10, 1, this.rangoMov)            
+          ]
+    }else if (this.dificultad === "3"){
+          this.obstaculosCarretera =  [
+            new Obstaculo('imagenes/valla_horizontal.png', 90, 430, 30, 30, 1),
+            new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
+            new Obstaculo('imagenes/bache.png', 190, 460, 30, 30, 1),
+            new Obstaculo('imagenes/bache.png', 770, 430, 30, 30, 1),
+            new Obstaculo('imagenes/bache.png', 470, 400, 30, 30, 1),
+            new Obstaculo('imagenes/valla_vertical.png', 800, 80, 30, 30, 1),
+            new Obstaculo('imagenes/valla_vertical.png', 280, 210, 30, 30, 1)
+          ];
+          this.enemigos= [
+            new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 4, 577,'v'),
+            new ZombieConductor('imagenes/tren_vertical.png', 678, 0, 30, 90, 3, 577,'v'),
+            new ZombieConductor('imagenes/tren_horizontal.png', 400, 322, 90, 30, 4, 961,'h'),
+            new ZombieCaminante('imagenes/zombie1.png', 800, 90, 10, 10, 1, this.rangoMov),
+            new ZombieCaminante('imagenes/zombie2.png', 200, 150, 10, 10, 2, this.rangoMov),
+            new ZombieCaminante('imagenes/zombie3.png', 300, 340, 10, 10, 1, this.rangoMov),
+            new ZombieCaminante('imagenes/zombie1.png', 150, 400, 10, 10, 2, this.rangoMov),
+            new ZombieCaminante('imagenes/zombie2.png', 250, 600, 10, 10, 3, this.rangoMov),
+          ]
+    }
+};
 Juego.iniciarRecursos();
-
+Juego.setearDificultad();
 // Activa las lecturas del teclado al presionar teclas
 // Documentacion: https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
 document.addEventListener('keydown', function(e) {
