@@ -259,7 +259,9 @@ Juego.setearDificultad = function(){
               new Obstaculo('imagenes/valla_horizontal.png', 90, 430, 30, 30, 1),
               new Obstaculo('imagenes/bache.png', 190, 460, 30, 30, 1),
               new Obstaculo('imagenes/bache.png', 470, 400, 30, 30, 1),
-              new Obstaculo('imagenes/valla_vertical.png', 800, 80, 30, 30, 1)
+              new Obstaculo('imagenes/valla_vertical.png', 800, 80, 30, 30, 1),
+              new Obstaculo('imagenes/auto_verde_abajo.png', 800, 300, 15, 30, 1),
+              new Obstaculo('imagenes/auto_verde_derecha.png', 350, 490, 30, 15, 1),
         ];
         this.enemigos= [
             new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 2, 577,'v'),
@@ -275,7 +277,9 @@ Juego.setearDificultad = function(){
             new Obstaculo('imagenes/bache.png', 770, 430, 30, 30, 1),
             new Obstaculo('imagenes/bache.png', 470, 400, 30, 30, 1),
             new Obstaculo('imagenes/valla_vertical.png', 800, 80, 30, 30, 1),
-            new Obstaculo('imagenes/valla_vertical.png', 280, 210, 30, 30, 1)
+            new Obstaculo('imagenes/valla_vertical.png', 280, 210, 30, 30, 1),
+            new Obstaculo('imagenes/auto_verde_abajo.png', 800, 300, 15, 30, 1),
+            new Obstaculo('imagenes/auto_verde_derecha.png', 350, 490, 30, 15, 1),
           ];
           this.enemigos= [
             new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 2, 577,'v'),
@@ -289,11 +293,14 @@ Juego.setearDificultad = function(){
           this.obstaculosCarretera =  [
             new Obstaculo('imagenes/valla_horizontal.png', 90, 430, 30, 30, 1),
             new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
+            new Obstaculo('imagenes/valla_horizontal.png', 110, 430, 30, 30, 1),
             new Obstaculo('imagenes/bache.png', 190, 460, 30, 30, 1),
             new Obstaculo('imagenes/bache.png', 770, 430, 30, 30, 1),
             new Obstaculo('imagenes/bache.png', 470, 400, 30, 30, 1),
             new Obstaculo('imagenes/valla_vertical.png', 800, 80, 30, 30, 1),
-            new Obstaculo('imagenes/valla_vertical.png', 280, 210, 30, 30, 1)
+            new Obstaculo('imagenes/valla_vertical.png', 280, 210, 30, 30, 1),
+            new Obstaculo('imagenes/auto_verde_abajo.png', 800, 300, 15, 30, 1),
+            new Obstaculo('imagenes/auto_verde_derecha.png', 350, 490, 30, 15, 1),
           ];
           this.enemigos= [
             new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 4, 577,'v'),
